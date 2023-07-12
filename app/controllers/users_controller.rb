@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-    @gender_options = User.genders_i18n.invert.map{|key,value|[key,value]}
+    gender_options
   end
 
   def create
@@ -19,5 +19,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :name, :gender, :password, :password_confirmation)
+  end
+
+  def gender_options
+    User.genders_i18n.invert.map{|key,value|[key,value]}
   end
 end
