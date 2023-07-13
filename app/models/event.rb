@@ -13,6 +13,7 @@ class Event < ApplicationRecord
 
   scope :future, -> { where('held_at > ?', Time.current) }
   scope :past, -> { where('held_at <= ?', Time.current) }
+  #scope :only_female, -> { where(only_woman: true) }
 
   with_options presence: true do
     validates :title
@@ -26,5 +27,9 @@ class Event < ApplicationRecord
 
   def future?
     !past?
+  end
+
+  def only_woman_event?
+    only_woman
   end
 end
